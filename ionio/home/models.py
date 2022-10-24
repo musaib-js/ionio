@@ -1,3 +1,4 @@
+from re import S
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.hashers import make_password
@@ -70,3 +71,11 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+class Files(models.Model):
+    uploaded_by = models.ForeignKey(User, related_name = 'user', on_delete = models.CASCADE)
+    file = models.FileField(upload_to = 'media')
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    
+    

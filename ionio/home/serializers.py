@@ -1,5 +1,7 @@
+from importlib.metadata import files
+from msilib.schema import File
 from rest_framework import serializers
-from .models import User
+from .models import User, Files
 
 
 class UserRegistration(serializers.ModelSerializer):
@@ -10,11 +12,21 @@ class UserRegistration(serializers.ModelSerializer):
             'password': {'write_only': True}
         }
 
-        def create(self, validated_data):
-            return User.objects.create_user(**validated_data)
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
 class UserLoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ['id', 'email', 'password']
+
+class FileSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Files
+        fields = ['file', 'uploaded_by']
+
+class FileSendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Files
+        fields = ['file', 'created_at']
