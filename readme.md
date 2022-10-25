@@ -1,1 +1,1 @@
-![alt text](Screenshots\Screenshot (452).png "Description goes here")
+![Sign Up Page](/Screenshots/Screenshot%20(450).png "Employee Data title")
